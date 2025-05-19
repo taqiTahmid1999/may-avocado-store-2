@@ -1,0 +1,9 @@
+<div>
+    {{ shop.name }}
+</div>
+<!-- Main menu -->
+<nav>
+    {% for link in linklists.main-menu.links -%}
+        <ul>{{ link.title | link_to: link.url }}</ul>
+    {%- endfor %}
+</nav>
