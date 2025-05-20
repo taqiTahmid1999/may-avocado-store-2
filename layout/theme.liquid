@@ -3,12 +3,13 @@
 <head>
     <title>t</title>
     {{ content_for_header }}
+    {{ 'tailwind.css' | asset_url | stylesheet_tag }}
 
 </head>
 <body>
-<header>
+
     {% render 'header' %}
-</header>
+
 {{ content_for_layout }}
 
 </body>
