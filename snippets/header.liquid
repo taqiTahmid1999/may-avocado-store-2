@@ -1,5 +1,23 @@
-<header>
+<header class="mb-8">
 
     this is a {{ shop.name }}
+    <nav class="flex flex-row justify-around">
+        {% for link in linklists %}
+            <div>
+            <p class="underline">{{ link.title | upcase | link_to: link.url }}</p>
+            {% if link.levels != 0 %}
+                {% for sublink in link.links %}
+                    <p>->{{ sublink.title  |  link_to : sublink.url}}</p>
+                    {% if sublink.levels != 0 %}
+                        {% for sublink2 in sublink.links %}
+                            <p>-> ->{{ sublink2.title | link_to: sublink2.url }}</p>
+                            {% endfor %}
+                        {% endif %}
+                {% endfor %}
+            {% endif %}
+            </div>
+        {% endfor %}
+    </nav>
+
     <hr>
 </header>
