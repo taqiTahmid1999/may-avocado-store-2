@@ -158,6 +158,9 @@
   }
 }
 @layer utilities {
+  .m-8 {
+    margin: calc(var(--spacing) * 8);
+  }
   .mb-8 {
     margin-bottom: calc(var(--spacing) * 8);
   }
