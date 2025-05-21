@@ -1,4 +1,6 @@
 <main>
-    <p>Use of articles global object</p>
-    {{ articles.size }}
+    <p>{{ blog.title }}</p>
+    {% for article in blog.articles %}
+        {{ article.title | link_to: article.url  }}
+    {% endfor %}
 </main>

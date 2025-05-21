@@ -1,1 +1,31 @@
-{{ article.title }}
+<p>{{ article.title }}</p>
+<p>Author: {{ article.author }} Published at : {{ article.published_at }}</p>
+{% for tag in article.tags %}
+    <p>{{ forloop.index }}- {{ tag }}</p>
+{% endfor %}
+{{ article.image | image_url: height: 500 | image_tag : preload: true }}
+<hr>
+{{ article.content }}
+
+<hr>
+<br>
+<p>Comment Section</p>
+{% form 'new_comment', article %}
+    {{ form_errors | default_errors }}
+    <div>
+        <label for="name">Name</label>
+        <input type="text" name="comment[name]" class="border-2" value="{{ form.author }}">
+    </div>
+    <div>
+        <label for="email">Email</label>
+        <input type="email" name="comment[email]" class="border-2" value="{{ form.email }}">
+    </div>
+    <div>
+        <label for="comment">Comment</label>
+        <textarea name="comment[body]" class="border-2"  cols="30" rows="10">{{ form.body }}</textarea>
+    </div>
+    <div class="submit">
+        <input type="submit" value="Post" class="border-2" >
+        
+    </div>
+{% endform %}
