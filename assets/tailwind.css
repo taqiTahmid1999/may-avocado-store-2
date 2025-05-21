@@ -177,6 +177,9 @@
     border-style: var(--tw-border-style);
     border-width: 2px;
   }
+  .p-8 {
+    padding: calc(var(--spacing) * 8);
+  }
   .underline {
     text-decoration-line: underline;
   }

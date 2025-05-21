@@ -11,7 +11,17 @@
 <br>
 <p>Comment Section</p>
 {% form 'new_comment', article %}
-    {{ form.errors | default_errors }}
+    <ul>
+        {% for error in form.errors %}
+            <li>
+                {% if error == 'form' %}
+                    {{ form.errors.messages[error] }}
+                {% else %}
+                    {{ form.errors.translated_fields[error] }} - {{ form.errors.messages[error] }}
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
 
     <div class="name">
         <label for="name">Name</label>
@@ -31,5 +41,18 @@
     <div class="submit">
         <input type="submit" value="Post">
     </div>
+    {% if form.posted_successfully? %}
+        <p>Thanks for your comment! It will appear once approved.</p>
+    {% endif %}
 {% endform %}
-comment count -{{ article.comment_count }}
+{% if article.comments.size > 0 %}
+    <h3>All Comments:</h3>
+    <ul>
+        {% for comment in article.comments %}
+            <li>
+                <strong>{{ comment.author }}</strong> said:<br>
+                {{ comment.content }}
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
