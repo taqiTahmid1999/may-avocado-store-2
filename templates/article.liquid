@@ -48,11 +48,28 @@
 {% if article.comments.size > 0 %}
     <h3>All Comments:</h3>
     <ul>
-        {% for comment in article.comments %}
-            <li>
-                <strong>{{ comment.author }}</strong> said:<br>
-                {{ comment.content }}
-            </li>
-        {% endfor %}
+        {% paginate article.comments by 2 %}
+            {% for comment in article.comments %}
+                <li>
+                    <strong>{{ comment.author }}</strong> said:<br>
+                    {{ comment.content }}
+                </li>
+            {% endfor %}
+
+            {% if paginate.previous.is_link %}
+                {{ paginate.previous.title | link_to: paginate.previous.url }}
+                {% endif %}
+            {% for part in paginate.parts %}
+                 {% if part.is_link %}
+                     <span>{{ part.title | link_to: part.url }}</span>
+                     {% else %}
+                <span>{{ part.title }}</span>
+                {% endif %}
+            {% endfor %}
+            {% if paginate.next.is_link %}
+                {{ paginate.next.title | link_to: paginate.next.url }}
+            {% endif %}
+        {% endpaginate %}
+
     </ul>
 {% endif %}
